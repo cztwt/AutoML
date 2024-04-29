@@ -1,0 +1,7 @@
+cust_id,string
+trx_date,datetime, %Y-%m-%d
+prod_code , string
+trx_code,int
+trx_amt,float
+trx_shr,float
+timestamps,float

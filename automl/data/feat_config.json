@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "name": "",
+        "feat_prefix": "f_buy",
+        "default_cols": ["trx_amt"],
+        "stats": ["count", "sum", "avg"],
+        "default_window": ["30d", "60d", "90d", "180d", "360d"],
+        "default_condition": "trx_code in [0, 1, 2]"
+    },
+    {
+        "id": 2,
+        "name": "",
+        "feat_prefix": "f_buy",
+        "default_cols": ["trx_amt"],
+        "stats": ["count", "sum", "avg"],
+        "default_window": ["30d", "60d", "90d", "180d", "360d"],
+        "default_condition": "trx_code == 3"
+    },
+    {
+        "id": 3,
+        "name": "",
+        "feat_prefix": "f_buy",
+        "default_cols": ["trx_amt"],
+        "stats": ["count", "sum", "avg"],
+        "default_condition": "trx_code == 3"
+    },
+    {
+        "id": 4,
+        "name": "",
+        "feat_prefix": "f_buy",
+        "stats":{
+            "count":{
+                "cols": "trx_amt",
+                "condition": "trx_code == 3"
+            },
+            "sum":{
+                "cols": "trx_amt",
+                "condition": "trx_code == 3"
+            },
+            "avg":{
+                "cols": "trx_amt",
+                "condition": "trx_code == 3"
+            }
+        }
+    }
+]

@@ -1,0 +1,49 @@
+version: 1.0.0 # 配置文件版本号
+tables:
+  - table: t1
+    partition_col: cust_id
+    sort_col: sample_date
+    schema: cust_id|string, prd_id|string, sample_date|datetime|%Y-%m-%d, label|int #表schema
+    file_path: ./automl/data/sample_table.csv # 数据文件路径
+
+  - table: t2
+    partition_col: cust_id
+    sort_col: trx_date
+    schema: cust_id|string, trx_date|datetime|%Y-%m-%d, prod_code|string, trx_code|int, trx_amt|float, trx_shr|float, timestamps|float
+    file_path: ./automl/data/feat_data.csv # 数据文件路径
+
+main_table: t1 # 单表时设置为该表，两张时需要指定一张主表（样本表）
+num_partitions: 2 # 文件分片个数
+output: 
+  file_path: ./automl/data/f_feat_data.csv # 特征输出文件路径
+  # sep: ','
+
+# custom_function_features: # 自定义函数计算特征
+#   py_file_path: ./define_feature_extract.py # 所在py文件
+#   function_name: define_feat_extract # 函数名字
+features: # 自动化配置需要计算的特征
+  - id: 1
+    name: ""
+    feat_prefix: f_buy
+    default_cols: trx_amt
+    stats: [count, sum, avg]
+    default_window: ['[30d, 10d)', 60d, 90d, 180d, 360d]
+    default_condition: trx_code in [0, 1, 2]
+  - id: 2
+    name: 
+    feat_prefix: f_buy
+    stats: {
+      count: {
+        cols: trx_amt,
+        condition: trx_code == 3
+      },
+      sum: {
+        cols: trx_amt,
+        condition: trx_code == 3
+      },
+      avg: {
+        cols: trx_amt,
+        condition: trx_code == 3
+      }
+    }
+    

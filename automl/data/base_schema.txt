@@ -1,0 +1,4 @@
+cust_id,string
+prd_id , string
+sample_date, datetime, %Y-%m-%d
+label, int
